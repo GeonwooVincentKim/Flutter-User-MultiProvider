@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_multiprovider/auths/firebase_auth.dart';
+import 'package:flutter_multiprovider/models/my_user.dart';
 import 'package:flutter_multiprovider/screens/MainScreen.dart';
 import 'package:flutter_multiprovider/screens/SigninScreen.dart';
 import 'package:provider/provider.dart';
@@ -18,7 +19,10 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<FirebaseAuthService>(
           create: (_) => FirebaseAuthService(),
-        )
+        ),
+        ChangeNotifierProvider<MyUser>(
+          create: (_) => MyUser(),
+        ),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

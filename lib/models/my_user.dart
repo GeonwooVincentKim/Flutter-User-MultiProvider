@@ -1,4 +1,7 @@
-class MyUser {
+import 'package:provider/provider.dart';
+import 'package:flutter/material.dart';
+
+class MyUser extends ChangeNotifier {
   final String email;
   final String password;
   final String name;
