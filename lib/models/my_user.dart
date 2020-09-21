@@ -1,13 +1,13 @@
-class User {
+class MyUser {
   final String email;
   final String password;
   final String name;
   final List<int> cart;
 
-  User({this.email, this.password, this.name, this.cart});
+  MyUser({this.email, this.password, this.name, this.cart});
 
-  factory User.fromMap(Map map) {
-    return User(
+  factory MyUser.fromMap(Map map) {
+    return MyUser(
       email: map['email'],
       password: map['password'],
       name: map['name'] ?? '', // 디폴트 값은 '' 으로 했습니다.

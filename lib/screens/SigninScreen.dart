@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_multiprovider/auths/firebase_auth.dart';
+import 'package:provider/provider.dart';
 
 class SigninScreen extends StatefulWidget {
   _SigninScreenState createState() => _SigninScreenState();
@@ -7,6 +9,12 @@ class SigninScreen extends StatefulWidget {
 class _SigninScreenState extends State<SigninScreen> {
   final emailController = TextEditingController();
   final passController = TextEditingController();
+  FirebaseAuthService _auth;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -17,6 +25,7 @@ class _SigninScreenState extends State<SigninScreen> {
 
   @override
   Widget build(BuildContext context) {
+    _auth = Provider.of<FirebaseAuthService>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: Text('Sign In'),
@@ -51,9 +60,12 @@ class _SigninScreenState extends State<SigninScreen> {
               'Sign In',
               style: TextStyle(color: Colors.white),
             ),
-            onPressed: () {
+            onPressed: () async {
               print(emailController.text);
               print(passController.text);
+              final user = await _auth.signInEmailPW(
+                  email: emailController.text, password: passController.text);
+              (user == null) ? print('로그인 실패') : print('로그인 성공');
             },
             color: Colors.blue,
           ),
