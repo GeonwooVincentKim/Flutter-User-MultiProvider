@@ -65,7 +65,12 @@ class _SigninScreenState extends State<SigninScreen> {
               print(passController.text);
               final user = await _auth.signInEmailPW(
                   email: emailController.text, password: passController.text);
-              (user == null) ? print('로그인 실패') : print('로그인 성공');
+              if (user == null) {
+                print('로그인 실패');
+              } else {
+                print('로그인 성공');
+                Navigator.of(context).pushReplacementNamed('/main');
+              }
             },
             color: Colors.blue,
           ),
