@@ -14,4 +14,11 @@ class FirebaseAuthService with ChangeNotifier {
     final authResult = await _auth.signInWithCredential(credential);
     return authResult.user;
   }
+
+  Future<User> signUpEmailPW(
+      {@required String email, @required String password}) async {
+    final authResult = await _auth.createUserWithEmailAndPassword(
+        email: email, password: password);
+    return authResult.user;
+  }
 }

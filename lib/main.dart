@@ -4,6 +4,7 @@ import 'package:flutter_multiprovider/auths/firebase_auth.dart';
 import 'package:flutter_multiprovider/models/my_user.dart';
 import 'package:flutter_multiprovider/screens/MainScreen.dart';
 import 'package:flutter_multiprovider/screens/SigninScreen.dart';
+import 'package:flutter_multiprovider/screens/SignupScreen.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
         initialRoute: '/',
         routes: {
           '/': (context) => SigninScreen(),
+          '/signup': (context) => SignupScreen(),
           '/main': (context) => MainScreen(),
         },
       ),

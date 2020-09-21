@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_multiprovider/auths/firebase_auth.dart';
 import 'package:provider/provider.dart';
@@ -81,7 +82,13 @@ class _SigninScreenState extends State<SigninScreen> {
                 style: TextStyle(color: Colors.grey),
                 children: [
                   TextSpan(
-                      text: 'Sign in', style: TextStyle(color: Colors.blue))
+                    text: 'Sign Up',
+                    style: TextStyle(color: Colors.blue),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        Navigator.of(context).pushNamed('/signup');
+                      },
+                  )
                 ],
               ),
             ),
