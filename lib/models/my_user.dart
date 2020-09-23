@@ -1,45 +1,46 @@
-import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
 class MyUser extends ChangeNotifier {
-  final String email;
-  final String password;
-  final String name;
-  final List<int> cart;
+  String name;
+  List<dynamic> cart;
 
-  MyUser({this.email, this.password, this.name, this.cart});
+  MyUser({this.name, this.cart});
 
   factory MyUser.fromMap(Map map) {
     return MyUser(
-      email: map['email'],
-      password: map['password'],
       name: map['name'] ?? '', // 디폴트 값은 '' 으로 했습니다.
       cart: map['age'] ?? [],
     );
-  }
-
-//   factory User.fromFireStore(DocumentSnapshot doc) {
-//     Map map = doc.data;
-// ​
-//     return User(
-//       name: map['name'] ?? '',
-//       age: map['age'] ?? 0,
-//     ) ;
-//   }
-
-  String getEmail() {
-    return email;
-  }
-
-  String getPassword() {
-    return password;
   }
 
   String getName() {
     return name;
   }
 
+  void setName(String n) {
+    name = n;
+  }
+
   List<int> getCart() {
     return cart;
+  }
+
+  void setCart(List<dynamic> c) {
+    cart = c;
+  }
+
+  void addItem(int k) {
+    cart.add(k);
+    notifyListeners();
+  }
+
+  void removeItem(int k) {
+    cart.remove(k);
+    notifyListeners();
+  }
+
+  void removeAll() {
+    cart.clear();
+    notifyListeners();
   }
 }

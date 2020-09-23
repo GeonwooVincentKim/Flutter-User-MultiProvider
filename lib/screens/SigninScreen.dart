@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_multiprovider/auths/firebase_auth.dart';
+import 'package:flutter_multiprovider/models/my_user.dart';
 import 'package:provider/provider.dart';
 
 class SigninScreen extends StatefulWidget {
@@ -11,6 +13,8 @@ class _SigninScreenState extends State<SigninScreen> {
   final emailController = TextEditingController();
   final passController = TextEditingController();
   FirebaseAuthService _auth;
+  MyUser _myuser;
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   @override
   void initState() {
@@ -27,6 +31,7 @@ class _SigninScreenState extends State<SigninScreen> {
   @override
   Widget build(BuildContext context) {
     _auth = Provider.of<FirebaseAuthService>(context, listen: false);
+    _myuser = Provider.of<MyUser>(context, listen: false);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -70,6 +75,15 @@ class _SigninScreenState extends State<SigninScreen> {
                 if (user == null) {
                   print('로그인 실패');
                 } else {
+                  await firestore
+                      .collection("users")
+                      .doc(user.uid)
+                      .get()
+                      .then((value) {
+                    _myuser.setName(value.data()["name"]);
+                    _myuser.setCart(value.data()["cart"]);
+                    print(value.data());
+                  });
                   print('로그인 성공');
                   Navigator.of(context).pushReplacementNamed('/main');
                 }
