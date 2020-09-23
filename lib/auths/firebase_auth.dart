@@ -4,6 +4,11 @@ import 'package:flutter/material.dart';
 class FirebaseAuthService with ChangeNotifier {
   FirebaseAuthService({auth}) : _auth = auth ?? FirebaseAuth.instance;
   FirebaseAuth _auth;
+  User _currentUser;
+
+  User getCurrentUser() {
+    return _currentUser;
+  }
 
   Future<User> signInEmailPW(
       {@required String email, @required String password}) async {
@@ -12,6 +17,7 @@ class FirebaseAuthService with ChangeNotifier {
       password: password,
     );
     final authResult = await _auth.signInWithCredential(credential);
+    _currentUser = authResult.user;
     return authResult.user;
   }
 

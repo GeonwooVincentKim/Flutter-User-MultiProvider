@@ -10,10 +10,10 @@ class MainScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Main Screen'),
+          title: Text('Welcome to Shopping Mall'),
         ),
         body: Center(
-          child: Text('Main Screen'),
+          child: Text(_auth.getCurrentUser().uid),
         ),
       ),
     );
